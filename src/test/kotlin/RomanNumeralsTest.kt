@@ -8,6 +8,12 @@ class RomanNumeralsTest{
     @Test
     fun convert_single_letters(){
         assertConversion(1, "I")
+        assertConversion(5, "V")
+        assertConversion(10, "X")
+        assertConversion(50, "L")
+        assertConversion(100, "C")
+        assertConversion(500, "D")
+        assertConversion(1000, "M")
     }
 
     private fun assertConversion(arabic: Int, expectedRoman: String) {
