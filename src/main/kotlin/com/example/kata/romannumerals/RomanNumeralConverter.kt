@@ -1,36 +1,30 @@
 package com.example.kata.romannumerals
 
 class RomanNumeralConverter {
+    private val configurations = arrayListOf(
+        Group(1000, "M"),
+        Group(500, "D"),
+        Group(100, "C"),
+        Group(50, "L"),
+        Group(10, "X"),
+        Group(5, "V"),
+        Group(1, "I")
+    )
+
     fun convert(arabic: Int): String {
         var remaining = arabic
-        var s = ""
-        while (true) {
-            if (remaining >= 1000) {
-                remaining -= 1000
-                s += "M"
-            } else if (remaining >= 500) {
-                remaining -= 500
-                s += "D"
-            } else if (remaining >= 100) {
-                remaining -= 100
-                s += "C"
-            } else if (remaining >= 50) {
-                remaining -= 50
-                s += "L"
-            } else if (remaining >= 10) {
-                remaining -= 10
-                s += "X"
-            } else if (remaining >= 5) {
-                remaining -= 5
-                s += "V"
-            } else if (remaining >= 1) {
-                remaining -= 1
-                s += "I"
-            } else {
-                break
+        var roman = ""
+        while (remaining > 0) {
+            for (configuration in configurations) {
+                if (remaining >= configuration.arabic) {
+                    remaining -= configuration.arabic
+                    roman += configuration.roman
+                }
             }
         }
-        return s
+        return roman
     }
 
 }
+
+data class Group(val arabic: Int, val roman: String)
