@@ -37,6 +37,17 @@ class RomanNumeralsTest {
         assertConversion(1000-100, "CM")
     }
 
+    @Test
+    fun can_repeat_letters() {
+        assertConversion(2000, "MM")
+    }
+
+    @Test
+    fun acceptance_cases() {
+        assertConversion(3927, "MMMCMXXVII")
+        assertConversion(3999, "MMMCMXCIX")
+    }
+
     private fun assertConversion(arabic: Int, expectedRoman: String) {
         assertThat(RomanNumeralConverter().convert(arabic)).isEqualTo(expectedRoman)
     }

@@ -24,6 +24,7 @@ class RomanNumeralConverter {
                 if (remaining >= configuration.arabic) {
                     remaining -= configuration.arabic
                     roman += configuration.roman
+                    break
                 }
             }
         }
