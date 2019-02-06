@@ -7,6 +7,7 @@ class RomanNumeralConverter {
         Group(100, "C"),
         Group(50, "L"),
         Group(10, "X"),
+        Group(9, "IX"),
         Group(5, "V"),
         Group(1, "I")
     )
