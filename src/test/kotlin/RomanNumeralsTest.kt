@@ -24,6 +24,12 @@ class RomanNumeralsTest {
     @Test
     fun convert_numbers_with_more_letters_simple_cases() {
         assertConversion(7, "VII")
+        assertConversion(8, "VIII")
+    }
+
+    @Test
+    fun convert_numbers_with_more_letters_exceptional_cases() {
+        assertConversion(9, "IX")
     }
 
     private fun assertConversion(arabic: Int, expectedRoman: String) {
