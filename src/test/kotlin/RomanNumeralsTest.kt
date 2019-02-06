@@ -83,6 +83,8 @@ class RomanNumeralsTest {
     @Property(trials = 1000)
     fun always_the_biggest_roman_available(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
         val convert = romanNumeralConverter.convert(arabic)
+        // Example: MCMC is not a valid Roman, because it should be written MM
+        // testing that CMC = 1000 = M != CMC
         for (i in 0.rangeTo(convert.length)) {
             val subst = convert.substring(i)
             val convert1 = romanNumeralConverter.convert(subst)
