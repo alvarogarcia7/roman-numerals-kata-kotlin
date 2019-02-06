@@ -3,9 +3,13 @@ package com.example.kata.romannumerals
 class RomanNumeralConverter {
     private val configurations = arrayListOf(
         Group(1000, "M"),
+        Group(900, "CM"),
         Group(500, "D"),
+        Group(400, "CD"),
         Group(100, "C"),
+        Group(90, "XC"),
         Group(50, "L"),
+        Group(40, "XL"),
         Group(10, "X"),
         Group(9, "IX"),
         Group(5, "V"),
