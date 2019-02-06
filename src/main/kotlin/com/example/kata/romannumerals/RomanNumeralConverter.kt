@@ -1,7 +1,7 @@
 package com.example.kata.romannumerals
 
 class RomanNumeralConverter {
-    private val configurations = arrayListOf(
+    val configurations = arrayListOf(
         Group(1000, "M"),
         Group(900, "CM"),
         Group(500, "D"),
@@ -13,6 +13,7 @@ class RomanNumeralConverter {
         Group(10, "X"),
         Group(9, "IX"),
         Group(5, "V"),
+        Group(4, "IV"),
         Group(1, "I")
     )
 

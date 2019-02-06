@@ -24,6 +24,10 @@ dependencies {
 
     // extension to the language
     compile group: 'io.arrow-kt', name: 'arrow-core', version: '0.8.1'
+
+    // property-based testing
+    testCompile 'com.pholser:junit-quickcheck-core:0.7'
+    testCompile 'com.pholser:junit-quickcheck-generators:0.7'
 }
 
 //https://stackoverflow.com/questions/19990716/how-to-ignore-a-specific-transitive-dependency-from-all-dependencies-in-gradle#19991364

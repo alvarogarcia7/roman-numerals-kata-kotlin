@@ -1,10 +1,25 @@
 package com.example.kata.romannumerals.test
 
 import com.example.kata.romannumerals.RomanNumeralConverter
+import com.pholser.junit.quickcheck.Property
+import com.pholser.junit.quickcheck.generator.InRange
+import com.pholser.junit.quickcheck.runner.JUnitQuickcheck
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.fail
+import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(JUnitQuickcheck::class)
 class RomanNumeralsTest {
+
+    private lateinit var romanNumeralConverter: RomanNumeralConverter
+
+    @Before
+    fun before() {
+        romanNumeralConverter = RomanNumeralConverter()
+    }
+
     @Test
     fun convert_single_letters() {
         assertConversion(1, "I")
@@ -48,7 +63,20 @@ class RomanNumeralsTest {
         assertConversion(3999, "MMMCMXCIX")
     }
 
+    @Property(trials = 1000)
+    fun cannot_have_4_equal_letters_in_a_row(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
+        val convert = romanNumeralConverter.convert(arabic)
+        for (configuration in romanNumeralConverter.configurations) {
+            val contains =
+                convert.contains(configuration.roman + configuration.roman + configuration.roman + configuration.roman)
+            if (contains) {
+                fail<String>("$arabic contains 4 times the same letter: $convert")
+            }
+            assertThat(contains).isFalse()
+        }
+    }
+
     private fun assertConversion(arabic: Int, expectedRoman: String) {
-        assertThat(RomanNumeralConverter().convert(arabic)).isEqualTo(expectedRoman)
+        assertThat(romanNumeralConverter.convert(arabic)).isEqualTo(expectedRoman)
     }
 }
