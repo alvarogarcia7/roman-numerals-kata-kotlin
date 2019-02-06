@@ -30,6 +30,7 @@ class RomanNumeralsTest {
     @Test
     fun convert_numbers_with_more_letters_exceptional_cases() {
         assertConversion(9, "IX")
+        assertConversion(19, "XIX")
     }
 
     private fun assertConversion(arabic: Int, expectedRoman: String) {
