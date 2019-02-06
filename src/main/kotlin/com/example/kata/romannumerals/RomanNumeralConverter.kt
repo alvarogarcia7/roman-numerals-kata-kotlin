@@ -36,7 +36,6 @@ class RomanNumeralConverter {
         var remaining = roman
         var arabic = 0
         while (remaining.isNotEmpty()) {
-
             for (configuration in configurations) {
                 if (remaining.startsWith(configuration.roman, true)) {
                     remaining = remaining.removePrefix(configuration.roman)
