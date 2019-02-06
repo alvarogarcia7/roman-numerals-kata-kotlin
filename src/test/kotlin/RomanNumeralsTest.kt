@@ -75,8 +75,24 @@ class RomanNumeralsTest {
             assertThat(contains).isFalse()
         }
     }
+    @Property(trials = 1000)
+    fun can_convert_back_and_forth(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
+        assertThat(romanNumeralConverter.convert(romanNumeralConverter.convert(arabic))).isEqualTo(arabic)
+    }
+
+    @Property(trials = 1000)
+    fun always_the_biggest_roman_available(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
+        val convert = romanNumeralConverter.convert(arabic)
+        for (i in 0.rangeTo(convert.length)) {
+            val subst = convert.substring(i)
+            val convert1 = romanNumeralConverter.convert(subst)
+            var convert2 = romanNumeralConverter.convert(convert1)
+            assertThat(convert2).isEqualTo(subst).withFailMessage("$arabic, $subst")
+        }
+    }
 
     private fun assertConversion(arabic: Int, expectedRoman: String) {
         assertThat(romanNumeralConverter.convert(arabic)).isEqualTo(expectedRoman)
+        assertThat(romanNumeralConverter.convert(expectedRoman)).isEqualTo(arabic)
     }
 }

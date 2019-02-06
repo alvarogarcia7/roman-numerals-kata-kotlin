@@ -32,6 +32,22 @@ class RomanNumeralConverter {
         return roman
     }
 
+    fun convert(roman: String): Int {
+        var remaining = roman
+        var arabic = 0
+        while (remaining.isNotEmpty()) {
+
+            for (configuration in configurations) {
+                if (remaining.startsWith(configuration.roman, true)) {
+                    remaining = remaining.removePrefix(configuration.roman)
+                    arabic += configuration.arabic
+                    break
+                }
+            }
+        }
+        return arabic
+    }
+
 }
 
 data class Group(val arabic: Int, val roman: String)
