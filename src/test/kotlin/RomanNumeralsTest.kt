@@ -16,6 +16,11 @@ class RomanNumeralsTest{
         assertConversion(1000, "M")
     }
 
+    @Test
+    fun convert_numbers_that_have_two_letters(){
+        assertConversion(2, "II")
+    }
+
     private fun assertConversion(arabic: Int, expectedRoman: String) {
         assertThat(RomanNumeralConverter().convert(arabic)).isEqualTo(expectedRoman)
     }
