@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="com.example.boilerplate.boilerplate.main" target="11" />
+      <module name="com.example.boilerplate.boilerplate.test" target="11" />
+      <module name="com.example.kata..boilerplate.main" target="11" />
+      <module name="com.example.kata..boilerplate.test" target="11" />
+      <module name="com.example.kata.romannumera.boilerplate.main" target="11" />
+      <module name="com.example.kata.romannumera.boilerplate.test" target="11" />
+      <module name="com.example.kata.romannumerals.boilerplate.main" target="11" />
+      <module name="com.example.kata.romannumerals.boilerplate.test" target="11" />
+      <module name="com.example.kata.romannumerals.romannumerals.main" target="11" />
+      <module name="com.example.kata.romannumerals.romannumerals.test" target="11" />
+      <module name="com.examplekata..boilerplate.main" target="11" />
+      <module name="com.examplekata..boilerplate.test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
