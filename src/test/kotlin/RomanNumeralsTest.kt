@@ -4,9 +4,9 @@ import com.example.kata.romannumerals.RomanNumeralConverter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class RomanNumeralsTest{
+class RomanNumeralsTest {
     @Test
-    fun convert_single_letters(){
+    fun convert_single_letters() {
         assertConversion(1, "I")
         assertConversion(5, "V")
         assertConversion(10, "X")
@@ -17,8 +17,13 @@ class RomanNumeralsTest{
     }
 
     @Test
-    fun convert_numbers_that_have_two_letters(){
+    fun convert_numbers_that_have_two_letters() {
         assertConversion(2, "II")
+    }
+
+    @Test
+    fun convert_numbers_with_more_letters_simple_cases() {
+        assertConversion(7, "VII")
     }
 
     private fun assertConversion(arabic: Int, expectedRoman: String) {
