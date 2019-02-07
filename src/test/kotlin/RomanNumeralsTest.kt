@@ -1,6 +1,8 @@
 package com.example.kata.romannumerals.test
 
+import com.example.kata.romannumerals.ByAllConfigurationsConverter
 import com.example.kata.romannumerals.RomanNumeralConverter
+import com.example.kata.romannumerals.RomanNumeralLetters
 import com.pholser.junit.quickcheck.Property
 import com.pholser.junit.quickcheck.generator.InRange
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck
@@ -17,7 +19,7 @@ class RomanNumeralsTest {
 
     @Before
     fun before() {
-        romanNumeralConverter = RomanNumeralConverter()
+        romanNumeralConverter = ByAllConfigurationsConverter()
     }
 
     @Test
@@ -66,7 +68,7 @@ class RomanNumeralsTest {
     @Property(trials = 1000)
     fun cannot_have_4_equal_letters_in_a_row(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
         val convert = romanNumeralConverter.convert(arabic)
-        for (configuration in romanNumeralConverter.configurations) {
+        for (configuration in RomanNumeralLetters.configurations) {
             val contains =
                 convert.contains(configuration.roman + configuration.roman + configuration.roman + configuration.roman)
             if (contains) {
