@@ -13,13 +13,15 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(JUnitQuickcheck::class)
-class RomanNumeralsTest {
+abstract class RomanNumeralsTest {
 
     private lateinit var romanNumeralConverter: RomanNumeralConverter
 
+    abstract fun obtainRomanNumeralsConverter(): RomanNumeralConverter
+
     @Before
     fun before() {
-        romanNumeralConverter = ByAllConfigurationsConverter()
+        romanNumeralConverter = obtainRomanNumeralsConverter()
     }
 
     @Test
