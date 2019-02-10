@@ -1,5 +1,6 @@
 import com.example.kata.romannumerals.*
 import com.example.kata.romannumerals.test.RomanNumeralsTest
+import org.junit.Test
 
 class ByAllConfigurationsRomanNumeralsTest : RomanNumeralsTest() {
     override fun obtainRomanNumeralsConverter(): RomanNumeralConverter {
@@ -24,6 +25,7 @@ class ByDigitsCompleteConversionTableRomanNumeralsTest : RomanNumeralsTest() {
         return ByDigitsCompleteConversionTableConverter()
     }
 }
+
 class ByFixingBrokenBusinessRulesRomanNumeralsTest : RomanNumeralsTest() {
     override fun obtainRomanNumeralsConverter(): RomanNumeralConverter {
         return ByFixingBrokenBusinessRulesRomanNumeralsConverter()

@@ -98,7 +98,7 @@ abstract class RomanNumeralsTest {
         }
     }
 
-    private fun assertConversion(arabic: Int, expectedRoman: String) {
+    fun assertConversion(arabic: Int, expectedRoman: String) {
         assertThat(romanNumeralConverter.convert(arabic)).isEqualTo(expectedRoman)
         assertThat(romanNumeralConverter.convert(expectedRoman)).isEqualTo(arabic)
     }
