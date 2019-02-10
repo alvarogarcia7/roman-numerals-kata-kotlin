@@ -24,3 +24,8 @@ class ByDigitsCompleteConversionTableRomanNumeralsTest : RomanNumeralsTest() {
         return ByDigitsCompleteConversionTableConverter()
     }
 }
+class ByFixingBrokenBusinessRulesRomanNumeralsTest : RomanNumeralsTest() {
+    override fun obtainRomanNumeralsConverter(): RomanNumeralConverter {
+        return ByFixingBrokenBusinessRulesRomanNumeralsConverter()
+    }
+}
