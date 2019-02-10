@@ -11,27 +11,27 @@ class ByDigitsUsingFormulaAndConversionTableRomanNumeralsConverter : RomanNumera
 
             val currentDigit = fetchNextDigit(digits)
 
-            val xx1 = digits.size.toDouble()
-            val magnitude = Math.pow(10.0, xx1).toInt()
+            val remainingDigits = digits.size
+            val magnitude = Math.pow(10.0, remainingDigits.toDouble()).toInt()
             val x = currentDigit * magnitude
 
             val multiplesOfTen = listOf("I", "X", "C", "M")
             result += when (x) {
                 3000, 300, 30, 3 -> {
-                    val selected = multiplesOfTen[xx1.toInt()]
+                    val selected = multiplesOfTen[remainingDigits]
                     selected + selected + selected
                 }
                 2000, 200, 20, 2 -> {
-                    val selected = multiplesOfTen[xx1.toInt()]
+                    val selected = multiplesOfTen[remainingDigits]
                     selected + selected
                 }
                 1000, 100, 10, 1 -> {
-                    val selected = multiplesOfTen[xx1.toInt()]
+                    val selected = multiplesOfTen[remainingDigits]
                     selected
                 }
                 900, 90, 9 -> {
-                    val selectedSmall = multiplesOfTen[xx1.toInt()]
-                    val selectedBig = multiplesOfTen[xx1.toInt() + 1]
+                    val selectedSmall = multiplesOfTen[remainingDigits]
+                    val selectedBig = multiplesOfTen[remainingDigits + 1]
                     selectedSmall + selectedBig
                 }
                 800 -> "DCCC"
