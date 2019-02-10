@@ -1,6 +1,6 @@
 package com.example.kata.romannumerals
 
-class ByDigitsConverter : RomanNumeralConverter {
+class ByDigitsUsingFormulaAndConversionTableRomanNumeralsConverter : RomanNumeralConverter {
 
 
     override fun convert(arabic: Int): String {
