@@ -9,8 +9,7 @@ class ByDigitsConverter : RomanNumeralConverter {
         var result = ""
         while (digits.size > 0) {
 
-            val currentDigit = digits[0]
-            digits.removeAt(0)
+            val currentDigit = fetchNextDigit(digits)
 
             val x = currentDigit * Math.pow(10.0, digits.size.toDouble()).toInt()
 
@@ -51,6 +50,12 @@ class ByDigitsConverter : RomanNumeralConverter {
 
 
         return result
+    }
+
+    private fun fetchNextDigit(digits: MutableList<Int>): Int {
+        val currentDigit = digits[0]
+        digits.removeAt(0)
+        return currentDigit
     }
 
     override fun convert(roman: String): Int {
