@@ -8,73 +8,155 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.fail
 import org.junit.Before
 import org.junit.Test
+import org.junit.experimental.theories.ParametersSuppliedBy
+import org.junit.experimental.theories.Theory
 import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
-@RunWith(JUnitQuickcheck::class)
-class RomanNumeralsTest {
-
-    private lateinit var romanNumeralConverter: RomanNumeralConverter
+open class RomanNumeralsTest {
+    protected lateinit var romanNumeralConverter: RomanNumeralConverter
 
     @Before
     fun before() {
         romanNumeralConverter = RomanNumeralConverter()
     }
 
-    @Test
-    fun convert_single_letters() {
-        assertConversion(1, "I")
-        assertConversion(5, "V")
-        assertConversion(10, "X")
-        assertConversion(50, "L")
-        assertConversion(100, "C")
-        assertConversion(500, "D")
-        assertConversion(1000, "M")
+    internal fun assertConversion(arabic: Int, expectedRoman: String) {
+        assertThat(romanNumeralConverter.convert(arabic)).isEqualTo(expectedRoman)
+        assertThat(romanNumeralConverter.convert(expectedRoman)).isEqualTo(arabic)
     }
 
-    @Test
-    fun convert_numbers_that_have_two_letters() {
-        assertConversion(2, "II")
-    }
+    @RunWith(Parameterized::class)
+    open class Examples_Convert_single_letters(val arabic: Int, val roman: String) : RomanNumeralsTest() {
 
-    @Test
-    fun convert_numbers_with_more_letters_simple_cases() {
-        assertConversion(7, "VII")
-        assertConversion(8, "VIII")
-    }
-
-    @Test
-    fun convert_numbers_with_more_letters_exceptional_cases() {
-        assertConversion(10 - 1, "IX")
-        assertConversion(10 + 10 - 1, "XIX")
-        assertConversion(50 - 10, "XL")
-        assertConversion(100 - 10, "XC")
-        assertConversion(500 - 100, "CD")
-        assertConversion(1000 - 100, "CM")
-    }
-
-    @Test
-    fun can_repeat_letters() {
-        assertConversion(2000, "MM")
-    }
-
-    @Test
-    fun acceptance_cases() {
-        assertConversion(3927, "MMMCMXXVII")
-        assertConversion(3999, "MMMCMXCIX")
-    }
-
-    @Property(trials = 1000)
-    fun cannot_have_4_equal_letters_in_a_row(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
-        val convert = romanNumeralConverter.convert(arabic)
-        for (configuration in romanNumeralConverter.configurations) {
-            val contains =
-                convert.contains(configuration.roman + configuration.roman + configuration.roman + configuration.roman)
-            if (contains) {
-                fail<String>("$arabic contains 4 times the same letter: $convert")
+        companion object Single_Letters {
+            @JvmStatic
+            @Parameterized.Parameters(name = "Arabic = {0}, Roman = {1}")
+            fun data(): Collection<Array<Any>> {
+                return arrayListOf(
+                    arrayOf(1, "I"),
+                    arrayOf(5, "V"),
+                    arrayOf(10, "X"),
+                    arrayOf(50, "L"),
+                    arrayOf(100, "C"),
+                    arrayOf(500, "D"),
+                    arrayOf(1000, "M")
+                )
             }
-            assertThat(contains).isFalse()
+        }
+
+        @Test()
+        open fun convert_single_letters() {
+            assertConversion(arabic, roman)
         }
     }
+
+    @RunWith(Parameterized::class)
+    open class Examples_2(val arabic: Int, val roman: String) : RomanNumeralsTest() {
+
+        companion object {
+            @JvmStatic
+            @Parameterized.Parameters(name = "Arabic = {0}, Roman = {1}")
+            fun data(): Collection<Array<Any>> {
+                return arrayListOf(
+                    arrayOf(2, "II")
+                )
+            }
+        }
+
+        @Test
+        fun convert_numbers_that_have_two_letters() {
+            assertConversion(arabic, roman)
+        }
+    }
+
+    @RunWith(Parameterized::class)
+    open class Examples_3(val arabic: Int, val roman: String) : RomanNumeralsTest() {
+
+        companion object {
+            @JvmStatic
+            @Parameterized.Parameters(name = "Arabic = {0}, Roman = {1}")
+            fun data(): Collection<Array<Any>> {
+                return arrayListOf(
+                    arrayOf(7, "VII"),
+                    arrayOf(8, "VIII")
+                )
+            }
+        }
+
+        @Test
+        fun convert_numbers_with_more_letters_simple_cases() {
+            assertConversion(arabic, roman)
+        }
+    }
+
+    @RunWith(Parameterized::class)
+    open class Examples_4(val arabic: Int, val roman: String) : RomanNumeralsTest() {
+
+        companion object {
+            @JvmStatic
+            @Parameterized.Parameters(name = "Arabic = {0}, Roman = {1}")
+            fun data(): Collection<Array<Any>> {
+                return arrayListOf(
+                    arrayOf(10 - 1, "IX"),
+                    arrayOf(10 + 10 - 1, "XIX"),
+                    arrayOf(50 - 10, "XL"),
+                    arrayOf(100 - 10, "XC"),
+                    arrayOf(500 - 100, "CD"),
+                    arrayOf(1000 - 100, "CM")
+                )
+            }
+        }
+
+        @Test
+        fun convert_numbers_with_more_letters_exceptional_cases() {
+            assertConversion(arabic, roman)
+        }
+    }
+
+    @RunWith(Parameterized::class)
+    open class Examples_5(val arabic: Int, val roman: String) : RomanNumeralsTest() {
+
+        companion object {
+            @JvmStatic
+            @Parameterized.Parameters(name = "Arabic = {0}, Roman = {1}")
+            fun data(): Collection<Array<Any>> {
+                return arrayListOf(
+                    arrayOf(2000, "MM")
+                )
+            }
+        }
+
+        @Test
+        fun can_repeat_letters() {
+            assertConversion(arabic, roman)
+        }
+    }
+
+    @RunWith(Parameterized::class)
+    open class Examples_6(val arabic: Int, val roman: String) : RomanNumeralsTest() {
+
+        companion object {
+            @JvmStatic
+            @Parameterized.Parameters(name = "Arabic = {0}, Roman = {1}")
+            fun data(): Collection<Array<Any>> {
+                return arrayListOf(
+                    arrayOf(3927, "MMMCMXXVII"),
+                    arrayOf(3999, "MMMCMXCIX")
+                )
+            }
+        }
+
+        @Test
+        fun acceptance_cases() {
+            assertConversion(arabic, roman)
+        }
+    }
+
+}
+
+@RunWith(JUnitQuickcheck::class)
+class Properties : RomanNumeralsTest() {
     @Property(trials = 1000)
     fun can_convert_back_and_forth(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
         assertThat(romanNumeralConverter.convert(romanNumeralConverter.convert(arabic))).isEqualTo(arabic)
@@ -93,8 +175,18 @@ class RomanNumeralsTest {
         }
     }
 
-    private fun assertConversion(arabic: Int, expectedRoman: String) {
-        assertThat(romanNumeralConverter.convert(arabic)).isEqualTo(expectedRoman)
-        assertThat(romanNumeralConverter.convert(expectedRoman)).isEqualTo(arabic)
+    @Property(trials = 1000)
+    fun cannot_have_4_equal_letters_in_a_row(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
+        val convert = romanNumeralConverter.convert(arabic)
+        for (configuration in romanNumeralConverter.configurations) {
+            val contains =
+                convert.contains(configuration.roman + configuration.roman + configuration.roman + configuration.roman)
+            if (contains) {
+                fail<String>("$arabic contains 4 times the same letter: $convert")
+            }
+            assertThat(contains).isFalse()
+        }
     }
+
 }
+
