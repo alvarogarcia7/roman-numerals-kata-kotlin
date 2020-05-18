@@ -79,7 +79,7 @@ abstract class RomanNumeralsTest {
             assertThat(contains).isFalse()
         }
     }
-    @Property(trials = 1000)
+    @Property(trials = 4000)
     fun can_convert_back_and_forth(@InRange(minInt = 1, maxInt = 3999) arabic: Int) {
         assertThat(romanNumeralConverter.convert(romanNumeralConverter.convert(arabic))).isEqualTo(arabic)
     }
